@@ -1,0 +1,21 @@
+
+Package: SA24204133
+Type: Package
+Title: Spectral density and parameter estiMAtion of MA model
+Version: 1.0
+Date: 2019-12-25
+Author: Wenrui Hu
+Maintainer: Wenrui Hu <1794773782@qq.com>
+Description: Several R and Rcpp function are included in this package for illustration. 
+License: GPL (>= 2)
+Imports: Rcpp, microbenchmark, RcppArmadillo,knitr, rmarkdown,bootstrap,DAAG,coda,boot,graphics
+LinkingTo: Rcpp,RcppArmadillo
+RoxygenNote: 7.3.2
+Encoding: UTF-8
+VignetteBuilder: knitr
+URL: http://github.com/HuWenrui605/SA24204133
+BugReports: http://github.com/HuWenrui605/SA24204133/issues
+NeedsCompilation: yes
+Packaged: 2022-11-24 14:02:49 UTC; zhanghong
+
+

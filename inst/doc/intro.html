@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Wenrui Hu" />
+
+<meta name="date" content="2024-12-07" />
+
+<title>Introduction to SA24204133</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to SA24204133</h1>
+<h4 class="author">Wenrui Hu</h4>
+<h4 class="date">2024-12-07</h4>
+
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>_SA24204133__ is a simple R package used to obtain the relevant
+information of MA model and ARMA model in time series analysis. Two
+functions are considered, namely, <em>ma.true.spectrum</em> and
+<em>armaWold</em>.These two functions obtain the theoretical spectral
+density of MA model and calculate Wold coefficient from ARMA model
+parameters respectively.</p>
+</div>
+<div id="source-code_" class="section level2">
+<h2>Source code_</h2>
+<p>The source R code for <em>ma.true.spectrum</em> is as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>ma.true.spectrum <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>    a, <span class="at">ngrid=</span><span class="dv">256</span>, <span class="at">sigma=</span><span class="dv">1</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="at">tit=</span><span class="st">&quot;True MA Spectral Density&quot;</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="at">plot.it=</span><span class="cn">TRUE</span>){</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">length</span>(a)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  freqs <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="dv">0</span>, <span class="at">to=</span>pi, <span class="at">length=</span>ngrid)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  spec <span class="ot">&lt;-</span> <span class="fu">numeric</span>(ngrid)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="cf">for</span>(ii <span class="cf">in</span> <span class="fu">seq</span>(ngrid)){</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    spec[ii] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">sum</span>(<span class="fu">complex</span>(<span class="at">mod=</span>a, <span class="at">arg=</span>freqs[ii]<span class="sc">*</span><span class="fu">seq</span>(p)))</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  }</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  spec <span class="ot">=</span> sigma<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">2</span><span class="sc">*</span>pi) <span class="sc">*</span> <span class="fu">abs</span>(spec)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="cf">if</span>(plot.it){</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="fu">plot</span>(freqs, spec, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>         <span class="at">main=</span>tit,</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>         <span class="at">xlab=</span><span class="st">&quot;frequency&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;spectrum&quot;</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>         <span class="at">axes=</span><span class="cn">FALSE</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    <span class="fu">axis</span>(<span class="dv">2</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    <span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at=</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span><span class="dv">6</span><span class="sc">*</span>pi,</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>         <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">expression</span>(pi<span class="sc">/</span><span class="dv">6</span>),</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>                  <span class="fu">expression</span>(pi<span class="sc">/</span><span class="dv">3</span>), <span class="fu">expression</span>(pi<span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>                  <span class="fu">expression</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">3</span>), <span class="fu">expression</span>(<span class="dv">5</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">6</span>), <span class="fu">expression</span>(pi)))</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    <span class="fu">box</span>()</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  }</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>  <span class="fu">invisible</span>(<span class="fu">list</span>(<span class="at">frequencies=</span>freqs, <span class="at">spectrum=</span>spec,</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>                 <span class="at">ma.coefficients=</span>a, <span class="at">sigma=</span>sigma))</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>}</span></code></pre></div>
+<p>The source Cpp code for <em>ma.true.spectrum</em> is as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>std<span class="sc">::</span>vector<span class="sc">&lt;</span>double<span class="sc">&gt;</span> <span class="fu">armaWold</span>(int n, const std<span class="sc">::</span>vector<span class="sc">&lt;</span>double<span class="sc">&gt;</span><span class="er">&amp;</span> a, const std<span class="sc">::</span>vector<span class="sc">&lt;</span>double<span class="sc">&gt;</span><span class="er">&amp;</span> <span class="at">b =</span> std<span class="sc">::</span>vector<span class="sc">&lt;</span>double<span class="sc">&gt;</span>()) {</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  int p <span class="ot">=</span> <span class="fu">a.size</span>();</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  int q <span class="ot">=</span> <span class="fu">b.size</span>();</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  </span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  std<span class="sc">::</span>vector<span class="sc">&lt;</span>double<span class="sc">&gt;</span> <span class="fu">arev</span>(<span class="fu">a.rbegin</span>(), <span class="fu">a.rend</span>());  <span class="sc">/</span><span class="er">/</span> Reversed version of a</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  std<span class="sc">::</span>vector<span class="sc">&lt;</span>double<span class="sc">&gt;</span> <span class="fu">psi</span>(n, <span class="fl">0.0</span>);  <span class="sc">/</span><span class="er">/</span> Initialize psi with zeros</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>  psi[<span class="dv">0</span>] <span class="ot">=</span> <span class="fl">1.0</span>;  <span class="sc">/</span><span class="er">/</span> Set the first element to <span class="dv">1</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  <span class="cf">for</span> (int <span class="at">j =</span> <span class="dv">0</span>; j <span class="sc">&lt;</span> n <span class="sc">-</span> <span class="dv">1</span>; <span class="sc">++</span>j) {</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>    double bj <span class="ot">=</span> (j <span class="sc">&lt;</span> q) ? b[j] <span class="sc">:</span> <span class="fl">0.0</span>;  <span class="sc">/</span><span class="er">/</span> If j is within b, use b[j], <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    std<span class="sc">::</span>vector<span class="sc">&lt;</span>double<span class="sc">&gt;</span> <span class="fu">psis</span>(<span class="fu">psi.begin</span>(), <span class="fu">psi.begin</span>() <span class="sc">+</span> std<span class="sc">::</span><span class="fu">min</span>(j <span class="sc">+</span> <span class="dv">1</span>, n));</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>    int np <span class="ot">=</span> <span class="fu">psis.size</span>();</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>    </span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> If the length of psis is less than p, pad with <span class="dv">0</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>    <span class="cf">if</span> (np <span class="sc">&lt;</span> p) {</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>      <span class="fu">psis.insert</span>(<span class="fu">psis.begin</span>(), p <span class="sc">-</span> np, <span class="fl">0.0</span>);</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>    }</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>    </span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Compute the <span class="cf">next</span> value of psi[j<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>    double sum <span class="ot">=</span> <span class="fl">0.0</span>;</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>    <span class="cf">for</span> (int <span class="at">i =</span> <span class="dv">0</span>; i <span class="sc">&lt;</span> p; <span class="sc">++</span>i) {</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>      sum <span class="sc">+</span><span class="er">=</span> arev[i] <span class="sc">*</span> psis[i];</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>    }</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>    </span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>    psi[j <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">=</span> bj <span class="sc">+</span> sum;</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  }</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>  </span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>  return psi;</span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>}</span></code></pre></div>
+<p>Two simple example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(SA24204133)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>xma <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model=</span><span class="fu">list</span>(<span class="at">ma=</span><span class="fu">c</span>(<span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.4</span>)), <span class="at">n =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="dv">4</span>) )</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">ma.true.spectrum</span>(xma,<span class="dv">256</span>,<span class="fl">1.0</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.2</span>);</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>);</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10</span>;</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">armaWold</span>(n, a, b)</span></code></pre></div>
+<pre><code>##  [1] 1.00 0.60 0.80 0.78 0.78 0.78 0.78 0.78 0.78 0.78</code></pre>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
